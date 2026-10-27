@@ -90,16 +90,30 @@
 
     function onStreamReady() {
       clearTimeout(streamTimeout);
+
+      function handlePlayFailure(e) {
+        console.log('Play info:', e);
+        // Nếu lỗi NotAllowedError (chưa có user gesture): bắn về cho App để App chủ động gọi lại play
+        if (e && (e.name === 'NotAllowedError' || String(e).includes('NotAllowedError') || String(e).includes('interact'))) {
+          if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.videoEvent) {
+            window.webkit.messageHandlers.videoEvent.postMessage({ action: 'playFailed', reason: 'NotAllowedError', error: String(e) });
+          }
+          if (typeof M.dispatchWebViewEvent === 'function') {
+            M.dispatchWebViewEvent('playFailed', { reason: 'NotAllowedError', error: String(e) });
+          }
+        }
+      }
+
       if (M.player) {
         M.player.play().catch((e) => {
-          console.log('Play info:', e);
+          handlePlayFailure(e);
           if (M.video && M.video.error) {
             fallbackToYoutube();
           }
         });
       } else if (M.video) {
         M.video.play().catch((e) => {
-          console.log('Video play error:', e);
+          handlePlayFailure(e);
         });
       }
       if (typeof M.sendStaticInfo === 'function') M.sendStaticInfo();

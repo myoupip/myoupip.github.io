@@ -219,6 +219,21 @@
     },
     unmute: function () {
       videoActions.setMuted(false);
+    },
+    setSessionId: function (sessionId) {
+      if (typeof M.setSessionId === 'function') {
+        M.setSessionId(sessionId);
+      } else if (typeof window.setSessionId === 'function') {
+        window.setSessionId(sessionId);
+      }
+    },
+    loadSession: function (sessionId) {
+      videoActions.setSessionId(sessionId);
+    },
+    playStream: function (url, fallbackVideoId) {
+      if (typeof M.playStream === 'function') {
+        M.playStream(url, fallbackVideoId);
+      }
     }
   };
 
@@ -257,6 +272,17 @@
       case 'muted':
         videoActions.setMuted(payload);
         break;
+      case 'setsessionid':
+      case 'setsession':
+      case 'sessionid':
+      case 'session':
+      case 'loadsession':
+        videoActions.setSessionId(payload);
+        break;
+      case 'playstream':
+      case 'loadstream':
+        videoActions.playStream(payload);
+        break;
       default:
         console.warn('Unknown app action:', action);
     }
@@ -284,6 +310,8 @@
   window.setMuted = videoActions.setMuted;
   window.mute = videoActions.mute;
   window.unmute = videoActions.unmute;
+  window.setSessionId = videoActions.setSessionId;
+  window.loadSession = videoActions.loadSession;
   window.getVideoStaticInfo = getVideoStaticInfo;
   window.getVideoDynamicInfo = getVideoDynamicInfo;
   window.handleAppAction = handleAppAction;

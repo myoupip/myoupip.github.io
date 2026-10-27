@@ -54,6 +54,18 @@ Trình phát trên Web liên tục xuất dữ liệu ra App theo 2 luồng riê
 }
 ```
 
+### 2.3. Luồng Báo lỗi Autoplay (`playFailed` / `NotAllowedError`)
+Khi video gặp chính sách chặn autoplay của trình duyệt WebKit/Chrome (`NotAllowedError: play() failed because the user didn't interact with the document first`):
+Web sẽ gửi event `playFailed` về cho App qua `videoEvent` hoặc `videoCallback`:
+```json
+{
+  "action": "playFailed",
+  "reason": "NotAllowedError",
+  "error": "NotAllowedError: The play method is not allowed..."
+}
+```
+Khi nhận được sự kiện này, App Native chủ động gọi lại lệnh `window.playVideo()` hoặc `window.handleAppAction('play')` (kèm kỹ thuật mute-then-unmute nếu cần) để tự động kích hoạt phát video mà không cần người dùng phải bấm tay vào web.
+
 ---
 
 ### 2.3. Hướng dẫn cấu hình nhận Callback trên các nền tảng
@@ -327,6 +339,8 @@ App Native có thể điều khiển video trên trang web bằng cách thực t
 | **Bật/Tắt Mute** | `window.setMuted(true)` | `window.handleAppAction('mute', true)` | Boolean: `true` (tắt tiếng), `false` (mở tiếng) |
 | **Tắt tiếng nhanh** | `window.mute()` | `window.handleAppAction('mute')` | Tắt tiếng |
 | **Bật tiếng nhanh** | `window.unmute()` | `window.handleAppAction('unmute')` | Mở tiếng |
+| **Đổi bài / Chuyển Session (Không reload web)** | `window.setSessionId('xyz')` | `window.handleAppAction('setSessionId', 'xyz')` | Chuỗi `session-id` hex (24 ký tự) |
+| **Phát luồng Stream trực tiếp** | `window.playStream(url)` | `window.handleAppAction('playStream', url)` | URL `.m3u8`, `.mp4` hoặc google video |
 
 ---
 

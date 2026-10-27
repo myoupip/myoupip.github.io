@@ -110,11 +110,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Khởi động khi tải trang: kiểm tra session-id hoặc link truyền vào
-  if (M.sessionId) {
-    // Dùng jQuery gọi API lấy thông tin video
+  // Hàm nạp session-id động (hỗ trợ chuyển bài không cần reload trang)
+  function loadSession(sessionId) {
+    if (!sessionId) return;
+    sessionId = String(sessionId).trim();
+    M.sessionId = sessionId;
+    M.isSessionMode = true;
+
+    // Ẩn thanh nhập form và đưa về chế độ màn hình sạch
+    document.body.classList.add('clean-display', 'hide-form');
+    if ($('#streamForm').length) $('#streamForm').hide();
+
+    // Reset trạng thái fallback
+    M.fallbackHandled = false;
+    M.currentFallbackVideoId = null;
+
+    // Cập nhật URL trình duyệt (replaceState) để đồng bộ URL mà không reload web
+    try {
+      const newUrl = window.location.pathname + '?session-id=' + encodeURIComponent(sessionId);
+      window.history.replaceState({ sessionId: sessionId }, '', newUrl);
+    } catch (e) {}
+
+    // Gọi API lấy thông tin video của session
     $.ajax({
-      url: 'https://tool.myoupip.com/video-play-events/' + encodeURIComponent(M.sessionId),
+      url: 'https://tool.myoupip.com/video-play-events/' + encodeURIComponent(sessionId),
       method: 'GET',
       dataType: 'json',
       success: function (res) {
@@ -144,6 +163,17 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error('Lỗi khi tải thông tin session:', error);
       }
     });
+  }
+
+  // Đăng ký toàn cục
+  M.loadSession = loadSession;
+  M.setSessionId = loadSession;
+  window.loadSession = loadSession;
+  window.setSessionId = loadSession;
+
+  // Khởi động khi tải trang: kiểm tra session-id hoặc link truyền vào
+  if (M.sessionId) {
+    loadSession(M.sessionId);
   } else {
     const initialUrl = getStreamUrlFromLocation();
     if (initialUrl && typeof M.playStream === 'function') {
