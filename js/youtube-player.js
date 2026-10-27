@@ -77,7 +77,10 @@
               if (e.data === YT.PlayerState.PLAYING) {
                 if (typeof M.sendStaticInfo === 'function') M.sendStaticInfo();
                 if (typeof M.startDynamicLoop === 'function') M.startDynamicLoop();
+              } else if (e.data === YT.PlayerState.PAUSED) {
+                if (typeof M.stopDynamicLoop === 'function') M.stopDynamicLoop();
               } else if (e.data === YT.PlayerState.ENDED) {
+                if (typeof M.stopDynamicLoop === 'function') M.stopDynamicLoop();
                 const info = typeof M.getVideoDynamicInfo === 'function' ? M.getVideoDynamicInfo() : null;
                 if (info && typeof M.dispatchWebViewEvent === 'function') {
                   M.dispatchWebViewEvent('dynamic', info);

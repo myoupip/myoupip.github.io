@@ -136,7 +136,7 @@
     }
   }
 
-  // Khởi động vòng lặp 1s/lần gửi thông tin không cố định qua WebView
+  // Khởi động vòng lặp 1s/lần gửi thông tin không cố định qua WebView (chỉ khi đang phát)
   let dynamicLoopTimer = null;
   function startDynamicLoop() {
     if (dynamicLoopTimer) return;
@@ -148,9 +148,17 @@
     }, 1000);
   }
 
+  function stopDynamicLoop() {
+    if (dynamicLoopTimer) {
+      clearInterval(dynamicLoopTimer);
+      dynamicLoopTimer = null;
+    }
+  }
+
   // Các action điều khiển video nhận từ App WebView (play, pause, volume, tốc độ, tua, mute)
   const videoActions = {
     play: function () {
+      startDynamicLoop();
       if (M.currentActivePlayer === 'youtube' && M.ytPlayer && typeof M.ytPlayer.playVideo === 'function') {
         M.ytPlayer.playVideo();
       } else if (M.player) {
@@ -160,6 +168,7 @@
       }
     },
     pause: function () {
+      stopDynamicLoop();
       if (M.currentActivePlayer === 'youtube' && M.ytPlayer && typeof M.ytPlayer.pauseVideo === 'function') {
         M.ytPlayer.pauseVideo();
       } else if (M.player) {
@@ -322,6 +331,7 @@
   M.getVideoDynamicInfo = getVideoDynamicInfo;
   M.sendStaticInfo = sendStaticInfo;
   M.startDynamicLoop = startDynamicLoop;
+  M.stopDynamicLoop = stopDynamicLoop;
   M.videoActions = videoActions;
   M.handleAppAction = handleAppAction;
 })();

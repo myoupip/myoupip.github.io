@@ -139,7 +139,12 @@
         if (typeof M.sendStaticInfo === 'function') M.sendStaticInfo();
       };
 
+      M.video.onpause = () => {
+        if (typeof M.stopDynamicLoop === 'function') M.stopDynamicLoop();
+      };
+
       M.video.onended = () => {
+        if (typeof M.stopDynamicLoop === 'function') M.stopDynamicLoop();
         if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.videoEvent) {
           window.webkit.messageHandlers.videoEvent.postMessage({ action: 'ended', currentTime: M.video.currentTime, duration: M.video.duration });
         }
