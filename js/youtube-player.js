@@ -82,6 +82,9 @@
                 if (info && typeof M.dispatchWebViewEvent === 'function') {
                   M.dispatchWebViewEvent('dynamic', info);
                 }
+                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.videoEvent) {
+                  window.webkit.messageHandlers.videoEvent.postMessage({ action: 'ended', currentTime: 0, duration: 0 });
+                }
               }
             },
             onError: function (event) {

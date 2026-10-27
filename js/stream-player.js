@@ -124,6 +124,12 @@
       M.video.onratechange = () => {
         if (typeof M.sendStaticInfo === 'function') M.sendStaticInfo();
       };
+
+      M.video.onended = () => {
+        if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.videoEvent) {
+          window.webkit.messageHandlers.videoEvent.postMessage({ action: 'ended', currentTime: M.video.currentTime, duration: M.video.duration });
+        }
+      };
     }
 
     // Kiểm tra nếu là luồng HLS (.m3u8)
