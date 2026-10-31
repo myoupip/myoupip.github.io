@@ -141,7 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!data) return;
 
         const videoId = data.video_id;
-        const url = data.url;
+        // const url = data.url;
+        const url = null;
         const isUrlEmpty = !url || url === 'null' || (typeof url === 'string' && url.trim() === '');
 
         if (videoId && isUrlEmpty) {
