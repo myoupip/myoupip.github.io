@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chính sách quyền riêng tư của YouBrowser One (iOS). Minh bạch về dữ liệu, bảo mật và tôn trọng quyền riêng tư người dùng.">
+  <title>Chính Sách Quyền Riêng Tư - YouBrowser One</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #0b0713;
+      --card-bg: rgba(26, 17, 39, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(255, 71, 133, 0.3);
+      --accent: #ff4785;
+      --gradient: linear-gradient(135deg, #ff4785 0%, #a855f7 50%, #6366f1 100%);
+      --text: #ffffff;
+      --text-muted: #c4b8d4;
+      --text-sub: #867b96;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(168, 85, 247, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(255, 71, 133, 0.14) 0%, transparent 45%);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(11, 7, 19, 0.85);
+      border-bottom: 1px solid var(--card-border);
+      padding: 16px 24px;
+    }
+
+    .header-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(255, 71, 133, 0.35);
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #ffffff, #f0abfc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #ff80bf;
+    }
+
+    .lang-toggle {
+      display: flex;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 3px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+
+    .lang-btn.active {
+      background: var(--gradient);
+      color: #fff;
+    }
+
+    main {
+      flex: 1;
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(255, 71, 133, 0.12);
+      border: 1px solid rgba(255, 71, 133, 0.25);
+      color: #ff7ebb;
+      margin-bottom: 14px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .gradient-title {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 12px;
+    }
+
+    .hero-date {
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    /* Content Cards */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 18px;
+      transition: border-color 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: var(--card-border-hover);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .card-icon {
+      font-size: 18px;
+    }
+
+    .card p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .card li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .card li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: var(--accent);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .card strong {
+      color: #fff;
+    }
+
+    .callout {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: #d1fae5;
+      margin-top: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    /* Contact Box */
+    .contact-box {
+      background: linear-gradient(135deg, rgba(38, 20, 60, 0.9) 0%, rgba(18, 10, 32, 0.9) 100%);
+      border: 1px solid rgba(255, 71, 133, 0.3);
+      border-radius: 18px;
+      padding: 26px 20px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .contact-box h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .contact-box p {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 16px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 8px 22px;
+      border-radius: 24px;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .contact-link:hover {
+      background: var(--gradient);
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      border-top: 1px solid var(--card-border);
+      background: rgba(11, 7, 19, 0.95);
+      padding: 22px 20px;
+      text-align: center;
+      color: var(--text-sub);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: #c084fc;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Language display switch */
+    .lang-en {
+      display: none;
+    }
+
+    body.en .lang-vi {
+      display: none;
+    }
+
+    body.en .lang-en {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 26px 16px 40px;
+      }
+      .card {
+        padding: 18px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <a href="marketing.html" class="logo-group">
+        <div class="logo-badge">YB</div>
+        <span class="logo-text">YouBrowser One</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="marketing.html" class="nav-link">
+          <span class="lang-vi">Giới thiệu</span>
+          <span class="lang-en">Overview</span>
+        </a>
+        <a href="support.html" class="nav-link">
+          <span class="lang-vi">Hỗ trợ</span>
+          <span class="lang-en">Support</span>
+        </a>
+        <a href="privacy.html" class="nav-link active">
+          <span class="lang-vi">Quyền riêng tư</span>
+          <span class="lang-en">Privacy</span>
+        </a>
+      </nav>
+
+      <div class="lang-toggle">
+        <button type="button" class="lang-btn active" id="btnVi" onclick="setLanguage('vi')">Tiếng Việt</button>
+        <button type="button" class="lang-btn" id="btnEn" onclick="setLanguage('en')">English</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <div class="hero">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span class="lang-vi">Tôn Trọng Quyền Riêng Tư Của Bạn</span>
+        <span class="lang-en">Your Privacy is Respected</span>
+      </div>
+
+      <h1 class="lang-vi">Chính Sách <span class="gradient-title">Quyền Riêng Tư</span></h1>
+      <h1 class="lang-en">Privacy <span class="gradient-title">Policy</span></h1>
+
+      <p class="lang-vi">
+        Chính sách này công bố minh bạch và đầy đủ về cách ứng dụng YouBrowser One (dành cho iOS) xử lý dữ liệu của bạn nhằm bảo đảm an toàn và bảo mật tối đa.
+      </p>
+      <p class="lang-en">
+        This policy transparently explains how YouBrowser One (for iOS) handles your data to ensure maximum security and privacy compliance.
+      </p>
+
+      <div class="hero-date">
+        <span class="lang-vi">Cập nhật lần cuối: Tháng 10/2026</span>
+        <span class="lang-en">Last updated: October 2026</span>
+      </div>
+    </div>
+
+    <!-- VIETNAMESE -->
+    <div class="lang-vi">
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">🛡️</span>
+          <span>1. Cam Kết Quyền Riêng Tư Cốt Lõi</span>
+        </div>
+        <p>YouBrowser One được thiết kế theo nguyên tắc tối giản dữ liệu (Data Minimization):</p>
+        <ul>
+          <li><strong>Không yêu cầu tài khoản cá nhân:</strong> Bạn sử dụng toàn bộ tính năng duyệt web và xem video mà không cần đăng ký tài khoản hay cung cấp danh tính (họ tên, email, số điện thoại).</li>
+          <li><strong>Không theo dõi người dùng (No Cross-App Tracking):</strong> Ứng dụng không thu thập IDFA (Advertising Identifier) và không theo dõi hành vi của bạn qua các ứng dụng hoặc trang web của bên thứ ba.</li>
+          <li><strong>Không bán dữ liệu:</strong> Chúng tôi tuyệt đối không bán, trao đổi hoặc thương mại hóa bất kỳ dữ liệu nào của bạn.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">💾</span>
+          <span>2. Dữ Liệu Được Thu Thập &amp; Cách Sử Dụng</span>
+        </div>
+        <p>Chúng tôi chỉ xử lý dữ liệu ở mức tối thiểu để ứng dụng vận hành bình thường:</p>
+        <ul>
+          <li><strong>Từ khóa tìm kiếm video:</strong> Khi bạn tìm kiếm trong tab Video, từ khóa được gửi để lấy kết quả công khai tương ứng. Từ khóa không được lưu trữ để lập hồ sơ cá nhân hay quảng cáo bám đuôi.</li>
+          <li><strong>Dấu trang (Bookmarks), Tab &amp; Lịch sử duyệt web:</strong> Được lưu trữ 100% cục bộ trên thiết bị của bạn. Ứng dụng không đồng bộ và không tải lịch sử hay dấu trang lên bất kỳ máy chủ bên ngoài nào.</li>
+          <li><strong>Cookie &amp; Bộ nhớ tạm (WebKit Data):</strong> Được quản lý trực tiếp bởi hệ điều hành iOS (WebKit Framework). Trong <em>Chế độ Ẩn danh (Incognito)</em>, dữ liệu tạm chỉ lưu trên bộ nhớ RAM và được xóa sạch hoàn toàn ngay khi bạn đóng tab ẩn danh hoặc thoát ứng dụng.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">🔑</span>
+          <span>3. Quyền Truy Cập Thiết Bị (Permissions)</span>
+        </div>
+        <p>Ứng dụng chỉ xin cấp quyền khi người dùng chủ động tương tác với tính năng tương ứng:</p>
+        <ul>
+          <li><strong>Camera &amp; Microphone:</strong> Ứng dụng tích hợp phần mô tả quyền (NSCameraUsageDescription &amp; NSMicrophoneUsageDescription) nhằm cho phép các trang web bạn truy cập qua trình duyệt (ví dụ: cuộc gọi video webRTC, công cụ ghi âm hoặc kiểm tra thiết bị trực tuyến) hoạt động. Hệ điều hành iOS sẽ hỏi ý kiến bạn trước khi cho phép; YouBrowser One tuyệt đối không tự ý truy cập hoặc chạy ngầm camera hay micro.</li>
+          <li><strong>Kết nối mạng (Internet):</strong> Cần thiết để tải nội dung trang web, phát video trực tuyến và tải danh sách video thịnh hành.</li>
+          <li><strong>Âm thanh nền (Background Audio):</strong> Cho phép bạn tiếp tục nghe âm thanh của video/phương tiện khi chuyển ứng dụng hoặc khóa màn hình theo ý muốn.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">🌐</span>
+          <span>4. Dịch Vụ &amp; Trang Web Bên Thứ Ba</span>
+        </div>
+        <p>
+          Trong quá trình duyệt web, bạn có thể tương tác với các nguồn nội dung trực tuyến:
+        </p>
+        <ul>
+          <li><strong>Dịch vụ Video &amp; Phát trực tuyến:</strong> Ứng dụng kết nối với các nguồn phát video công khai (như YouTube) để lấy thông tin phát trực tuyến theo yêu cầu của bạn.</li>
+          <li><strong>Trang web bạn truy cập:</strong> Khi bạn nhập địa chỉ web và truy cập, các trang web bên ngoài đó sẽ áp dụng chính sách quyền riêng tư và điều khoản sử dụng riêng của họ.</li>
+          <li><strong>Không tích hợp SDK quảng cáo:</strong> Ứng dụng không chứa bất kỳ bộ thư viện quảng cáo nào (không Google AdMob, Facebook SDK, AppsFlyer,...).</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">🗑️</span>
+          <span>5. Lưu Trữ Dữ Liệu &amp; Quyền Của Người Dùng (Data Retention &amp; Rights)</span>
+        </div>
+        <p>Bạn luôn giữ quyền kiểm soát tuyệt đối đối với dữ liệu của mình:</p>
+        <ul>
+          <li><strong>Quyền xóa lịch sử duyệt web:</strong> Bạn có thể xóa từng mục hoặc toàn bộ lịch sử duyệt web bất kỳ lúc nào trực tiếp trong Cài đặt của YouBrowser One.</li>
+          <li><strong>Quyền quản lý dấu trang &amp; tab:</strong> Bạn có thể sửa, đóng hoặc xóa dấu trang và danh sách tab đã lưu bất cứ khi nào.</li>
+          <li><strong>Quyền thu hồi quyền truy cập:</strong> Bạn có thể bật hoặc tắt quyền truy cập Camera/Microphone bất cứ lúc nào trong mục <em>Cài đặt của iOS &gt; YouBrowser One</em>.</li>
+          <li><strong>Xóa sạch khi gỡ ứng dụng:</strong> Khi bạn xóa ứng dụng khỏi thiết bị, toàn bộ dữ liệu lưu trữ cục bộ và bộ nhớ đệm sẽ bị xóa vĩnh viễn khỏi thiết bị.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">👶</span>
+          <span>6. Quyền Riêng Tư Của Trẻ Em</span>
+        </div>
+        <p>
+          YouBrowser One không chủ ý thu thập bất kỳ thông tin nhận dạng cá nhân nào từ trẻ em dưới 13 tuổi (hoặc độ tuổi tối thiểu theo quy định tại quốc gia của bạn). Nếu phụ huynh hoặc người giám hộ phát hiện bất kỳ dữ liệu nào được cung cấp mà không có sự đồng ý, vui lòng liên hệ với chúng tôi để xóa ngay lập tức.
+        </p>
+      </section>
+
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-en">
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">🛡️</span>
+          <span>1. Core Privacy Principles</span>
+        </div>
+        <p>YouBrowser One is designed with strict data minimization principles:</p>
+        <ul>
+          <li><strong>No Account Required:</strong> You can fully experience web browsing and media playback without registering an account or providing personal identity (name, email, phone number).</li>
+          <li><strong>No Cross-App Tracking:</strong> We do not collect IDFA (Advertising Identifier) and do not track your activity across third-party apps or websites.</li>
+          <li><strong>No Data Selling:</strong> We never sell, rent, trade, or monetize any of your data.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">💾</span>
+          <span>2. Data Collection &amp; Usage</span>
+        </div>
+        <p>We process only the minimum information necessary to operate the application:</p>
+        <ul>
+          <li><strong>Video Search Queries:</strong> When querying videos in the Video tab, your search terms are sent to fetch public listings. We do not store queries to build user profiles or deliver targeted advertising.</li>
+          <li><strong>Bookmarks, Tabs &amp; Browsing History:</strong> Stored 100% locally on your device. We do not sync, upload, or transfer your browsing history or bookmarks to any remote server.</li>
+          <li><strong>Cookies &amp; Temporary Web Data:</strong> Managed directly by Apple's iOS WebKit framework. In <em>Incognito (Private) Mode</em>, temporary data is kept strictly in RAM and completely discarded when the incognito session or app is closed.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">🔑</span>
+          <span>3. Device Permissions</span>
+        </div>
+        <p>The app only requests system permissions when actively initiated by user actions:</p>
+        <ul>
+          <li><strong>Camera &amp; Microphone:</strong> Declared in our Info.plist (NSCameraUsageDescription &amp; NSMicrophoneUsageDescription) to enable web pages accessed via the browser (e.g. webRTC video conferencing, audio recording, or browser hardware testing tools) to function. The iOS system will prompt you for explicit permission before granting access; YouBrowser One never accesses camera or microphone in the background.</li>
+          <li><strong>Internet Access:</strong> Required to load web content, stream media, and retrieve public video listings.</li>
+          <li><strong>Background Audio:</strong> Used to continue playing audio for video/media content when the screen is locked or while switching apps, according to user preference.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">🌐</span>
+          <span>4. Third-Party Services &amp; Links</span>
+        </div>
+        <p>
+          While browsing and playing media, you may interact with external services:
+        </p>
+        <ul>
+          <li><strong>Video Services &amp; Streaming:</strong> The app connects to public streaming providers (such as YouTube) to resolve media metadata and playback requested by the user.</li>
+          <li><strong>Visited Websites:</strong> Websites you navigate to through the browser are governed by their own independent privacy and cookie policies.</li>
+          <li><strong>No Ad Trackers:</strong> The app does not integrate any third-party advertising SDKs or tracking networks (no Google AdMob, Facebook SDK, AppsFlyer, etc.).</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">🗑️</span>
+          <span>5. Data Retention &amp; User Rights</span>
+        </div>
+        <p>You have full autonomy over your data at all times:</p>
+        <ul>
+          <li><strong>Clear Browsing History:</strong> You can delete specific entries or purge your entire browsing history anytime directly within YouBrowser One's Settings.</li>
+          <li><strong>Manage Bookmarks &amp; Tabs:</strong> You can edit, close, or remove saved bookmarks and tabs whenever you wish.</li>
+          <li><strong>Revoke Permissions:</strong> You can revoke Camera or Microphone access at any time via <em>iOS Settings &gt; YouBrowser One</em>.</li>
+          <li><strong>Complete Deletion on Uninstall:</strong> Deleting YouBrowser One from your iOS device immediately and permanently erases all locally stored data, cache, and Keychain records.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span class="card-icon">👶</span>
+          <span>6. Children's Privacy</span>
+        </div>
+        <p>
+          YouBrowser One does not knowingly collect any personally identifiable information from children under 13 (or the minimum legal age in your jurisdiction). If a parent or guardian becomes aware that personal information has been provided, please contact us immediately for prompt deletion.
+        </p>
+      </section>
+
+    </div>
+
+    <!-- Contact Box -->
+    <div class="contact-box">
+      <h3 class="lang-vi">Liên Hệ Với Chúng Tôi</h3>
+      <h3 class="lang-en">Contact Us</h3>
+
+      <p class="lang-vi">
+        Nếu bạn có bất kỳ câu hỏi hoặc phản hồi nào liên quan đến Chính Sách Quyền Riêng Tư của YouBrowser One, vui lòng gửi email cho chúng tôi:
+      </p>
+      <p class="lang-en">
+        If you have any questions or feedback regarding the YouBrowser One Privacy Policy, please reach out via email:
+      </p>
+
+      <a href="mailto:dangtinha2@gmail.com" class="contact-link">
+        <span>✉️</span>
+        <span>dangtinha2@gmail.com</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 <strong>YouBrowser One</strong>. All rights reserved.</p>
+    <p style="margin-top: 8px;">
+      <a href="marketing.html">Giới thiệu (Overview)</a> • 
+      <a href="support.html">Hỗ trợ kỹ thuật (Support)</a> • 
+      <a href="privacy.html">Chính sách quyền riêng tư (Privacy Policy)</a>
+    </p>
+  </footer>
+
+  <script>
+    function setLanguage(lang) {
+      if (lang === 'en') {
+        document.body.classList.add('en');
+        document.getElementById('btnEn').classList.add('active');
+        document.getElementById('btnVi').classList.remove('active');
+        document.documentElement.lang = 'en';
+        localStorage.setItem('yb_lang', 'en');
+      } else {
+        document.body.classList.remove('en');
+        document.getElementById('btnVi').classList.add('active');
+        document.getElementById('btnEn').classList.remove('active');
+        document.documentElement.lang = 'vi';
+        localStorage.setItem('yb_lang', 'vi');
+      }
+    }
+
+    (function() {
+      const saved = localStorage.getItem('yb_lang');
+      if (saved === 'en') {
+        setLanguage('en');
+      } else if (!saved) {
+        const navLang = navigator.language || '';
+        if (navLang.startsWith('en')) {
+          setLanguage('en');
+        }
+      }
+    })();
+  </script>
+
+</body>
+</html>

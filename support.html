@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trung tâm trợ giúp và hỗ trợ kỹ thuật chính thức cho YouBrowser One (iOS). Hướng dẫn sử dụng, câu hỏi thường gặp và kênh liên hệ.">
+  <title>Hỗ Trợ Kỹ Thuật & Trợ Giúp - YouBrowser One Support</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #0b0713;
+      --card-bg: rgba(26, 17, 39, 0.72);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(255, 71, 133, 0.35);
+      --accent: #ff4785;
+      --gradient: linear-gradient(135deg, #ff4785 0%, #a855f7 50%, #6366f1 100%);
+      --text: #ffffff;
+      --text-muted: #c4b8d4;
+      --text-sub: #867b96;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(168, 85, 247, 0.16) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(255, 71, 133, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(11, 7, 19, 0.85);
+      border-bottom: 1px solid var(--card-border);
+      padding: 16px 24px;
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(255, 71, 133, 0.35);
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #ffffff, #f0abfc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #ff80bf;
+    }
+
+    .lang-toggle {
+      display: flex;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 3px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--gradient);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(255, 71, 133, 0.3);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 71, 133, 0.12);
+      border: 1px solid rgba(255, 71, 133, 0.35);
+      color: #ff80bf;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 14px;
+      line-height: 1.25;
+      background: linear-gradient(135deg, #ffffff 40%, #e9d5ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 17px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Contact Cards Grid */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 28px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+      border-color: var(--card-border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(255, 71, 133, 0.15);
+      border: 1px solid rgba(255, 71, 133, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    .contact-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .contact-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--gradient);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(255, 71, 133, 0.3);
+    }
+
+    .btn-action:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    /* FAQ Section */
+    .section-title {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .faq-question {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .faq-answer {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .faq-answer ul {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .faq-answer li {
+      margin-bottom: 6px;
+    }
+
+    /* App Metadata Box */
+    .meta-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-sub);
+      font-weight: 700;
+    }
+
+    .meta-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--text-sub);
+      font-size: 13.5px;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: #ff80bf;
+    }
+
+    /* Language Switch Visibility */
+    .lang-en { display: none; }
+    body.en .lang-vi { display: none; }
+    body.en .lang-en { display: block; }
+    body.en .lang-en-inline { display: inline; }
+    .lang-en-inline { display: none; }
+    body.en .lang-vi-inline { display: none; }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 30px; }
+      .header-inner { flex-direction: column; gap: 14px; align-items: stretch; }
+      .nav-links { justify-content: center; }
+      .lang-toggle { align-self: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <a href="marketing.html" class="logo-group">
+        <div class="logo-badge">Y</div>
+        <span class="logo-text">YouBrowser One</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="marketing.html" class="nav-link">
+          <span class="lang-vi-inline">Giới thiệu</span>
+          <span class="lang-en-inline">Overview</span>
+        </a>
+        <a href="support.html" class="nav-link active">
+          <span class="lang-vi-inline">Hỗ trợ</span>
+          <span class="lang-en-inline">Support</span>
+        </a>
+        <a href="privacy.html" class="nav-link">
+          <span class="lang-vi-inline">Quyền riêng tư</span>
+          <span class="lang-en-inline">Privacy</span>
+        </a>
+      </nav>
+
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btnVi" onclick="setLanguage('vi')">VI</button>
+        <button class="lang-btn" id="btnEn" onclick="setLanguage('en')">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="badge">
+        <span class="lang-vi-inline">Trung Tâm Trợ Giúp & Kỹ Thuật</span>
+        <span class="lang-en-inline">Official Help & Support Center</span>
+      </div>
+
+      <h1 class="lang-vi">Chúng Tôi Luôn Sẵn Sàng Hỗ Trợ Bạn</h1>
+      <h1 class="lang-en">How Can We Help You Today?</h1>
+
+      <p class="hero-sub lang-vi">
+        Hướng dẫn sử dụng, giải đáp thắc mắc thường gặp và kênh hỗ trợ trực tiếp từ đội ngũ phát triển YouBrowser One.
+      </p>
+      <p class="hero-sub lang-en">
+        User guides, troubleshooting steps, and direct technical support from the YouBrowser One engineering team.
+      </p>
+    </div>
+
+    <!-- Contact Cards Grid -->
+    <div class="contact-grid">
+      <!-- Email Support -->
+      <div class="contact-card">
+        <div>
+          <div class="card-icon">✉️</div>
+          <h3 class="lang-vi">Hỗ Trợ Kỹ Thuật Trực Tiếp</h3>
+          <h3 class="lang-en">Direct Email Support</h3>
+          <p class="lang-vi">Gặp sự cố khi duyệt web, lỗi crash hoặc thắc mắc về tính năng? Gửi thư cho chúng tôi để được phản hồi trong vòng 24 giờ.</p>
+          <p class="lang-en">Encountering browsing glitches, issues, or have technical inquiries? Reach out to get a response within 24 hours.</p>
+        </div>
+        <a href="mailto:dangtinha2@gmail.com?subject=YouBrowser%20One%20Support%20Request" class="btn-action">
+          <span>dangtinha2@gmail.com</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- Feedback & Suggestions -->
+      <div class="contact-card">
+        <div>
+          <div class="card-icon">💡</div>
+          <h3 class="lang-vi">Góp Ý & Yêu Cầu Tính Năng</h3>
+          <h3 class="lang-en">Feedback & Feature Requests</h3>
+          <p class="lang-vi">Bạn có ý tưởng giúp giao diện công thái học hoặc tab video tiện lợi hơn? Chúng tôi luôn lắng nghe ý kiến từ cộng đồng người dùng.</p>
+          <p class="lang-en">Have ideas to improve ergonomic one-handed navigation or video playback? We value every feedback to shape future updates.</p>
+        </div>
+        <a href="mailto:dangtinha2@gmail.com?subject=YouBrowser%20One%20Feedback" class="btn-action">
+          <span class="lang-vi-inline">Gửi Đóng Góp Ý Kiến</span>
+          <span class="lang-en-inline">Submit Feedback</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- Privacy & Data -->
+      <div class="contact-card">
+        <div>
+          <div class="card-icon">🛡️</div>
+          <h3 class="lang-vi">Bảo Mật & Quyền Riêng Tư</h3>
+          <h3 class="lang-en">Privacy & Data Governance</h3>
+          <p class="lang-vi">Tìm hiểu cách YouBrowser One mã hóa dữ liệu cục bộ, bảo vệ danh tính và cơ chế tối giản thu thập thông tin.</p>
+          <p class="lang-en">Learn how YouBrowser One protects your browsing activity with local-only storage and zero telemetry tracking.</p>
+        </div>
+        <a href="privacy.html" class="btn-action">
+          <span class="lang-vi-inline">Xem Chính Sách Riêng Tư</span>
+          <span class="lang-en-inline">View Privacy Policy</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <h2 class="section-title">
+      <span>❓</span>
+      <span class="lang-vi-inline">Câu Hỏi Thường Gặp (FAQ)</span>
+      <span class="lang-en-inline">Frequently Asked Questions</span>
+    </h2>
+
+    <div class="faq-list">
+      <!-- Q1: Ergonomic Carousel -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>🎯</span>
+          <span class="lang-vi-inline">Thao tác một tay với thanh Dock Nổi Vòng Cung như thế nào?</span>
+          <span class="lang-en-inline">How does the Ergonomic Thumb-Arc Floating Dock work?</span>
+        </div>
+        <div class="faq-answer">
+          <p class="lang-vi">
+            YouBrowser One đặt toàn bộ các nút điều hướng quan trọng vào một thanh Dock bo cong ở cạnh dưới màn hình theo đúng tầm với tự nhiên của ngón cái. Bạn có thể:
+          </p>
+          <ul class="lang-vi">
+            <li><strong>Vuốt ngang vòng cung:</strong> Chuyển đổi nhanh giữa Trang chủ, Tab Trình duyệt và Tab Video.</li>
+            <li><strong>Chạm giữ Dock:</strong> Mở nhanh danh sách dấu trang (Bookmarks) hoặc quản lý tab.</li>
+            <li><strong>Thu gọn tự động:</strong> Khi bạn cuộn xem trang web, thanh dock tự động ẩn đi để tối đa hóa không gian đọc bài.</li>
+          </ul>
+          <p class="lang-en">
+            YouBrowser One clusters essential navigation controls within a floating curved dock anchored at the bottom edge, exactly within thumb reach:
+          </p>
+          <ul class="lang-en">
+            <li><strong>Swipe horizontally along the arc:</strong> Rapidly switch between Home, Web Browser tabs, and Video Tab.</li>
+            <li><strong>Long press dock items:</strong> Instantly summon bookmarks or active workspaces.</li>
+            <li><strong>Auto-collapse on scroll:</strong> The dock minimizes gracefully when reading long web pages to deliver fullscreen focus.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q2: Video Background Playback -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>🎬</span>
+          <span class="lang-vi-inline">Làm thế nào để nghe âm thanh video trong nền khi tắt màn hình?</span>
+          <span class="lang-en-inline">How do I enable background audio playback for videos?</span>
+        </div>
+        <div class="faq-answer">
+          <p class="lang-vi">
+            Tính năng chạy nền được bật mặc định. Khi phát video trong <strong>Tab Video Độc Lập</strong> hoặc trên trình duyệt:
+          </p>
+          <ul class="lang-vi">
+            <li>Bạn có thể khóa màn hình iPhone hoặc chuyển sang ứng dụng khác; âm thanh vẫn tiếp tục phát liền mạch.</li>
+            <li>Điều khiển Play/Pause/Tua trực tiếp ngay trên <strong>Lock Screen (Màn hình khóa)</strong> và <strong>Control Center</strong> của iOS.</li>
+          </ul>
+          <p class="lang-en">
+            Background audio is enabled out of the box. While playing media in the <strong>Dedicated Video Tab</strong> or web view:
+          </p>
+          <ul class="lang-en">
+            <li>You can lock your iPhone or switch apps; playback continues without interruption.</li>
+            <li>Use iOS <strong>Lock Screen Now Playing</strong> widgets or <strong>Control Center</strong> to pause, resume, or skip tracks.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q3: Clear History & Data -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>🗑️</span>
+          <span class="lang-vi-inline">Làm cách nào để xóa toàn bộ lịch sử duyệt web?</span>
+          <span class="lang-en-inline">How can I clear my browsing history and stored cache?</span>
+        </div>
+        <div class="faq-answer">
+          <p class="lang-vi">
+            Để xóa dữ liệu lịch sử duyệt web:
+          </p>
+          <ul class="lang-vi">
+            <li>Chạm vào biểu tượng <strong>Cài đặt (Bánh răng)</strong> trên thanh điều hướng.</li>
+            <li>Cuộn xuống mục <strong>Dữ liệu & Quyền riêng tư (Data & Privacy)</strong>.</li>
+            <li>Chọn <strong>Xóa toàn bộ lịch sử duyệt web</strong> và xác nhận. Mọi thông tin URL, tiêu đề trang và bộ nhớ tạm sẽ lập tức bị xóa sạch vĩnh viễn khỏi máy.</li>
+          </ul>
+          <p class="lang-en">
+            To purge all browsing records stored locally:
+          </p>
+          <ul class="lang-en">
+            <li>Tap the <strong>Settings (Gear) icon</strong> in the browser bar.</li>
+            <li>Scroll to <strong>Data & Privacy</strong>.</li>
+            <li>Tap <strong>Clear All Browsing History</strong> and confirm. All cached URLs, timestamps, and page titles will be permanently erased.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q4: Camera and Mic Permissions -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>📷</span>
+          <span class="lang-vi-inline">Tại sao ứng dụng khai báo quyền Camera và Micro?</span>
+          <span class="lang-en-inline">Why does the app declare Camera and Microphone permissions?</span>
+        </div>
+        <div class="faq-answer">
+          <p class="lang-vi">
+            YouBrowser One không tự ý chạy camera hoặc micro. Quyền này chỉ kích hoạt khi bạn chủ động truy cập các trang web có tính năng họp trực tuyến (Google Meet, Zoom web, WebRTC) hoặc kiểm tra micro. Hệ điều hành iOS sẽ luôn hiện hộp thoại xin phép trước khi bất kỳ website nào được phép truy cập. Bạn có thể thu hồi quyền bất kỳ lúc nào trong <em>Cài đặt iOS > YouBrowser One</em>.
+          </p>
+          <p class="lang-en">
+            YouBrowser One never accesses your camera or microphone autonomously. Permissions are declared so web pages you visit (such as WebRTC video calls, voice recording, or hardware diagnostic tools) can function when you explicitly allow them. iOS will always prompt for approval, and you can revoke permissions anytime via <em>iOS Settings > YouBrowser One</em>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q5: Multi-workspace -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>📁</span>
+          <span class="lang-vi-inline">Không gian làm việc (Workspaces) giúp ích gì cho tôi?</span>
+          <span class="lang-en-inline">How do Workspaces improve daily multitasking?</span>
+        </div>
+        <div class="faq-answer">
+          <p class="lang-vi">
+            Workspaces cho phép bạn gom các tab theo ngữ cảnh, ví dụ: "Học tập", "Công việc", hoặc "Giải trí". Các tab thuộc không gian này sẽ không bị trộn lẫn với không gian khác, giúp bạn tập trung tuyệt đối và mở lại công việc dang dở bất kỳ lúc nào.
+          </p>
+          <p class="lang-en">
+            Workspaces organize your active tabs into isolated contexts, such as "Research", "Work", or "Personal". Tabs in one workspace never mix with another, keeping your mental space clear and allowing one-tap resumption of ongoing tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- App Information Box -->
+    <div class="meta-box">
+      <div class="meta-item">
+        <span class="meta-label">Ứng Dụng / Application</span>
+        <span class="meta-value">YouBrowser One for iOS</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Phiên Bản / Version</span>
+        <span class="meta-value">1.0.1 (Build 1)</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Yêu Cầu / Compatibility</span>
+        <span class="meta-value">iOS 17.0+ (iPhone & iPad)</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Nhà Phát Triển / Developer</span>
+        <span class="meta-value">Dang Tinh Vu (MyOupip)</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 <strong>YouBrowser One</strong>. All rights reserved.</p>
+    <p style="margin-top: 8px;">
+      <a href="marketing.html">Giới thiệu (Overview)</a> • 
+      <a href="support.html">Hỗ trợ kỹ thuật (Support)</a> • 
+      <a href="privacy.html">Chính sách quyền riêng tư (Privacy Policy)</a>
+    </p>
+  </footer>
+
+  <script>
+    function setLanguage(lang) {
+      if (lang === 'en') {
+        document.body.classList.add('en');
+        document.getElementById('btnEn').classList.add('active');
+        document.getElementById('btnVi').classList.remove('active');
+        document.documentElement.lang = 'en';
+        localStorage.setItem('yb_lang', 'en');
+      } else {
+        document.body.classList.remove('en');
+        document.getElementById('btnVi').classList.add('active');
+        document.getElementById('btnEn').classList.remove('active');
+        document.documentElement.lang = 'vi';
+        localStorage.setItem('yb_lang', 'vi');
+      }
+    }
+
+    (function() {
+      const saved = localStorage.getItem('yb_lang');
+      if (saved === 'en') {
+        setLanguage('en');
+      } else if (!saved) {
+        const navLang = navigator.language || '';
+        if (navLang.startsWith('en')) {
+          setLanguage('en');
+        }
+      }
+    })();
+  </script>
+
+</body>
+</html>
