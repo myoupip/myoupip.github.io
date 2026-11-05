@@ -243,8 +243,40 @@
       if (typeof M.playStream === 'function') {
         M.playStream(url, fallbackVideoId);
       }
+    },
+    togglePictureInPicture: function () {
+      return togglePictureInPicture();
+    },
+    togglePiP: function () {
+      return togglePictureInPicture();
+    },
+    pip: function () {
+      return togglePictureInPicture();
     }
   };
+
+  // Hỗ trợ bật/tắt chế độ Picture-in-Picture (PiP)
+  function togglePictureInPicture() {
+    var video = document.querySelector('video') || M.video;
+    if (!video) return false;
+
+    // Hỗ trợ WebKit Presentation Mode trên iOS Safari / WKWebView
+    if (video.webkitSupportsPresentationMode && typeof video.webkitSetPresentationMode === 'function') {
+      var nextMode = (video.webkitPresentationMode === 'picture-in-picture') ? 'inline' : 'picture-in-picture';
+      video.webkitSetPresentationMode(nextMode);
+      return true;
+    }
+
+    // Hoặc chuẩn Picture-in-Picture API chuẩn W3C
+    if (document.pictureInPictureElement) {
+      document.exitPictureInPicture();
+    } else if (video.requestPictureInPicture) {
+      video.requestPictureInPicture().catch(function (e) {
+        console.error('PiP error:', e);
+      });
+    }
+    return true;
+  }
 
   // Hàm nhận lệnh tổng hợp từ App WebView: window.handleAppAction(action, payload)
   function handleAppAction(action, payload) {
@@ -292,6 +324,11 @@
       case 'loadstream':
         videoActions.playStream(payload);
         break;
+      case 'pip':
+      case 'togglepip':
+      case 'pictureinpicture':
+      case 'togglepictureinpicture':
+        return togglePictureInPicture();
       default:
         console.warn('Unknown app action:', action);
     }
@@ -321,6 +358,9 @@
   window.unmute = videoActions.unmute;
   window.setSessionId = videoActions.setSessionId;
   window.loadSession = videoActions.loadSession;
+  window.togglePictureInPicture = togglePictureInPicture;
+  window.togglePiP = togglePictureInPicture;
+  window.pip = togglePictureInPicture;
   window.getVideoStaticInfo = getVideoStaticInfo;
   window.getVideoDynamicInfo = getVideoDynamicInfo;
   window.handleAppAction = handleAppAction;
@@ -332,6 +372,9 @@
   M.sendStaticInfo = sendStaticInfo;
   M.startDynamicLoop = startDynamicLoop;
   M.stopDynamicLoop = stopDynamicLoop;
+  M.togglePictureInPicture = togglePictureInPicture;
+  M.togglePiP = togglePictureInPicture;
+  M.pip = togglePictureInPicture;
   M.videoActions = videoActions;
   M.handleAppAction = handleAppAction;
 })();

@@ -151,6 +151,14 @@
           window.webkit.messageHandlers.videoEvent.postMessage({ action: 'ended', currentTime: M.video.currentTime, duration: M.video.duration });
         }
       };
+
+      // Bắt sự kiện thay đổi chế độ Picture-in-Picture trên WebKit iOS
+      M.video.addEventListener('webkitpresentationmodechanged', () => {
+        const mode = M.video.webkitPresentationMode;
+        if (typeof M.dispatchWebViewEvent === 'function') {
+          M.dispatchWebViewEvent('pip', { mode: mode, isPiP: (mode === 'picture-in-picture') });
+        }
+      });
     }
 
     // Kiểm tra nếu là luồng HLS (.m3u8)
