@@ -110,18 +110,22 @@
     return null;
   }
 
-  // Luồng 2: Lấy thông tin không cố định (getCurrentTime, getVideoLoadedFraction)
+  // Luồng 2: Lấy thông tin không cố định (getCurrentTime, getVideoLoadedFraction, getDuration)
   function getVideoDynamicInfo() {
     if (M.currentActivePlayer === 'youtube' && M.ytPlayer && typeof M.ytPlayer.getCurrentTime === 'function') {
+      const dur = typeof M.ytPlayer.getDuration === 'function' ? (M.ytPlayer.getDuration() || 0) : 0;
       return {
         playerType: 'youtube',
         getCurrentTime: Number((M.ytPlayer.getCurrentTime() || 0).toFixed(2)),
+        getDuration: Number(dur.toFixed(2)),
         getVideoLoadedFraction: Number((M.ytPlayer.getVideoLoadedFraction() || 0).toFixed(4))
       };
     } else if (M.currentActivePlayer === 'stream' && M.video) {
+      const dur = (M.video.duration && !isNaN(M.video.duration)) ? Number(M.video.duration.toFixed(2)) : 0;
       return {
         playerType: 'stream',
         getCurrentTime: Number((M.video.currentTime || 0).toFixed(2)),
+        getDuration: dur,
         getVideoLoadedFraction: getHtml5LoadedFraction()
       };
     }
@@ -261,42 +265,14 @@
     }
   };
 
-  // Hỗ trợ kích hoạt Fullscreen cho video HTML5 hoặc YouTube
-  function toggleFullscreen() {
-    var video = document.querySelector('video') || M.video;
-    if (video && M.currentActivePlayer !== 'youtube' && video.style.display !== 'none') {
-      if (typeof video.webkitEnterFullscreen === 'function') {
-        video.webkitEnterFullscreen();
-        return true;
-      }
-      if (typeof video.requestFullscreen === 'function') {
-        video.requestFullscreen().catch(function(){});
-        return true;
-      }
+  // Hỗ trợ kích hoạt Fullscreen (đồng bộ giao diện web, không dùng W3C Element RequestFullscreen để tránh banner domain WebKit)
+  function toggleFullscreen(forceState) {
+    if (typeof forceState === 'boolean') {
+      document.body.classList.toggle('app-fullscreen', forceState);
+    } else {
+      document.body.classList.toggle('app-fullscreen');
     }
-
-    var yt = document.getElementById('youtubePlayer');
-    var iframe = yt ? (yt.querySelector('iframe') || yt) : document.querySelector('iframe');
-    var target = iframe || yt || document.querySelector('.player-wrapper');
-    if (target) {
-      if (document.fullscreenElement || document.webkitFullscreenElement) {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-        return true;
-      } else {
-        if (typeof target.requestFullscreen === 'function') {
-          target.requestFullscreen().catch(function(){});
-          return true;
-        } else if (typeof target.webkitRequestFullscreen === 'function') {
-          target.webkitRequestFullscreen();
-          return true;
-        } else if (typeof target.webkitEnterFullscreen === 'function') {
-          target.webkitEnterFullscreen();
-          return true;
-        }
-      }
-    }
-    return false;
+    return true;
   }
 
   // Hỗ trợ bật/tắt chế độ Picture-in-Picture (PiP)

@@ -57,14 +57,12 @@
           widget_referrer: window.location.href || 'https://myoupip.github.io/'
         };
 
-        // Nếu phát qua session-id: ẩn sạch controls của YouTube nhưng giữ fs = 1 để cho phép fullscreen
-        if (M.isSessionMode) {
-          playerVars.controls = 0;       // Ẩn thanh điều khiển
-          playerVars.disablekb = 1;      // Tắt điều khiển bàn phím
-          playerVars.fs = 1;             // Cho phép kích hoạt Fullscreen từ App
-          playerVars.iv_load_policy = 3; // Tắt chú thích
-          playerVars.modestbranding = 1;
-        }
+        // Bật đầy đủ thanh điều khiển YouTube (timeline scrubber, quality, captions, settings)
+        playerVars.controls = 1;       // Hiện thanh điều khiển YouTube đầy đủ
+        playerVars.disablekb = 0;      // Cho phép điều khiển bàn phím
+        playerVars.fs = 1;             // Cho phép kích hoạt Fullscreen
+        playerVars.iv_load_policy = 3; // Tắt chú thích rườm rà
+        playerVars.modestbranding = 1;
 
         M.ytPlayer = new YT.Player('youtubePlayer', {
           host: 'https://www.youtube.com',
@@ -80,11 +78,28 @@
               if (typeof M.startDynamicLoop === 'function') M.startDynamicLoop();
             },
             onStateChange: function (e) {
+              const curTime = (M.ytPlayer && typeof M.ytPlayer.getCurrentTime === 'function') ? (M.ytPlayer.getCurrentTime() || 0) : 0;
+              const durTime = (M.ytPlayer && typeof M.ytPlayer.getDuration === 'function') ? (M.ytPlayer.getDuration() || 0) : 0;
+
               if (e.data === YT.PlayerState.PLAYING) {
                 if (typeof M.sendStaticInfo === 'function') M.sendStaticInfo();
                 if (typeof M.startDynamicLoop === 'function') M.startDynamicLoop();
+                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.videoEvent) {
+                  window.webkit.messageHandlers.videoEvent.postMessage({
+                    action: 'play',
+                    currentTime: curTime,
+                    duration: durTime
+                  });
+                }
               } else if (e.data === YT.PlayerState.PAUSED) {
                 if (typeof M.stopDynamicLoop === 'function') M.stopDynamicLoop();
+                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.videoEvent) {
+                  window.webkit.messageHandlers.videoEvent.postMessage({
+                    action: 'pause',
+                    currentTime: curTime,
+                    duration: durTime
+                  });
+                }
               } else if (e.data === YT.PlayerState.ENDED) {
                 if (typeof M.stopDynamicLoop === 'function') M.stopDynamicLoop();
                 const info = typeof M.getVideoDynamicInfo === 'function' ? M.getVideoDynamicInfo() : null;
