@@ -252,8 +252,52 @@
     },
     pip: function () {
       return togglePictureInPicture();
+    },
+    toggleFullscreen: function () {
+      return toggleFullscreen();
+    },
+    fullscreen: function () {
+      return toggleFullscreen();
     }
   };
+
+  // Hỗ trợ kích hoạt Fullscreen cho video HTML5 hoặc YouTube
+  function toggleFullscreen() {
+    var video = document.querySelector('video') || M.video;
+    if (video && M.currentActivePlayer !== 'youtube' && video.style.display !== 'none') {
+      if (typeof video.webkitEnterFullscreen === 'function') {
+        video.webkitEnterFullscreen();
+        return true;
+      }
+      if (typeof video.requestFullscreen === 'function') {
+        video.requestFullscreen().catch(function(){});
+        return true;
+      }
+    }
+
+    var yt = document.getElementById('youtubePlayer');
+    var iframe = yt ? (yt.querySelector('iframe') || yt) : document.querySelector('iframe');
+    var target = iframe || yt || document.querySelector('.player-wrapper');
+    if (target) {
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        return true;
+      } else {
+        if (typeof target.requestFullscreen === 'function') {
+          target.requestFullscreen().catch(function(){});
+          return true;
+        } else if (typeof target.webkitRequestFullscreen === 'function') {
+          target.webkitRequestFullscreen();
+          return true;
+        } else if (typeof target.webkitEnterFullscreen === 'function') {
+          target.webkitEnterFullscreen();
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   // Hỗ trợ bật/tắt chế độ Picture-in-Picture (PiP)
   function togglePictureInPicture() {
@@ -329,6 +373,9 @@
       case 'pictureinpicture':
       case 'togglepictureinpicture':
         return togglePictureInPicture();
+      case 'fullscreen':
+      case 'togglefullscreen':
+        return toggleFullscreen();
       default:
         console.warn('Unknown app action:', action);
     }
@@ -361,6 +408,8 @@
   window.togglePictureInPicture = togglePictureInPicture;
   window.togglePiP = togglePictureInPicture;
   window.pip = togglePictureInPicture;
+  window.toggleFullscreen = toggleFullscreen;
+  window.fullscreen = toggleFullscreen;
   window.getVideoStaticInfo = getVideoStaticInfo;
   window.getVideoDynamicInfo = getVideoDynamicInfo;
   window.handleAppAction = handleAppAction;
@@ -375,6 +424,8 @@
   M.togglePictureInPicture = togglePictureInPicture;
   M.togglePiP = togglePictureInPicture;
   M.pip = togglePictureInPicture;
+  M.toggleFullscreen = toggleFullscreen;
+  M.fullscreen = toggleFullscreen;
   M.videoActions = videoActions;
   M.handleAppAction = handleAppAction;
 })();

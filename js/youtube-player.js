@@ -46,30 +46,36 @@
       } else {
         const originParam = (window.location.protocol.startsWith('http') && window.location.origin)
           ? window.location.origin
-          : undefined;
+          : 'https://myoupip.github.io';
 
         const playerVars = {
           autoplay: 1,
           playsinline: 1,
           rel: 0,
           enablejsapi: 1,
-          origin: originParam
+          origin: originParam,
+          widget_referrer: window.location.href || 'https://myoupip.github.io/'
         };
 
-        // Nếu phát qua session-id: ẩn sạch controls của YouTube
+        // Nếu phát qua session-id: ẩn sạch controls của YouTube nhưng giữ fs = 1 để cho phép fullscreen
         if (M.isSessionMode) {
           playerVars.controls = 0;       // Ẩn thanh điều khiển
           playerVars.disablekb = 1;      // Tắt điều khiển bàn phím
-          playerVars.fs = 0;             // Tắt nút fullscreen YouTube
+          playerVars.fs = 1;             // Cho phép kích hoạt Fullscreen từ App
           playerVars.iv_load_policy = 3; // Tắt chú thích
           playerVars.modestbranding = 1;
         }
 
         M.ytPlayer = new YT.Player('youtubePlayer', {
+          host: 'https://www.youtube.com',
           videoId: ytid,
           playerVars: playerVars,
           events: {
             onReady: function () {
+              const iframe = document.querySelector('#youtubePlayer iframe') || document.querySelector('#youtubePlayer');
+              if (iframe && iframe.tagName === 'IFRAME') {
+                iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+              }
               if (typeof M.sendStaticInfo === 'function') M.sendStaticInfo();
               if (typeof M.startDynamicLoop === 'function') M.startDynamicLoop();
             },
