@@ -132,8 +132,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) {}
 
     // Gọi API lấy thông tin video của session
+    const apiBase = M.apiBaseUrl || 'https://tool.myoupip.com';
     $.ajax({
-      url: 'https://tool.myoupip.com/video-play-events/' + encodeURIComponent(sessionId),
+      url: apiBase + '/video-play-events/' + encodeURIComponent(sessionId),
       method: 'GET',
       dataType: 'json',
       success: function (res) {

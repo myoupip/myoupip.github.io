@@ -4,6 +4,9 @@
  */
 
 window.MYouPiP = window.MYouPiP || {
+  // Cấu hình Base URL
+  apiBaseUrl: 'https://tool.myoupip.com',
+
   // Trạng thái phiên phát
   sessionId: null,
   isSessionMode: false,
