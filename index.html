@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="referrer" content="no-referrer">
   <title>MYouPiP - Clean HTML5 & HLS Video Player</title>
   <!-- Thư viện Plyr & Hls.js chuẩn tương tự LiveReacting -->
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
@@ -28,7 +28,7 @@
   <!-- Khung phát video chuẩn 16:9 không viền, không logo YouTube -->
   <div class="player-wrapper">
     <div id="youtubePlayer" style="display: none;"></div>
-    <video id="videoPlayer" playsinline referrerpolicy="no-referrer"></video>
+    <video id="videoPlayer" playsinline webkit-playsinline x-webkit-airplay="allow" referrerpolicy="no-referrer"></video>
 
     <!-- Màn hình chào khi chưa có link -->
     <div class="empty-state" id="emptyState">

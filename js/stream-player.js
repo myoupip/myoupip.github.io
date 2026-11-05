@@ -76,17 +76,19 @@
     if (M.video) {
       M.video.onerror = () => {
         console.error('Lỗi HTML5 Video:', M.video.error);
-        fallbackToYoutube();
+        if (M.video.error && M.currentFallbackVideoId) {
+          fallbackToYoutube();
+        }
       };
     }
 
     // Thời gian chờ nếu link stream chết hoàn toàn không phản hồi
     let streamTimeout = setTimeout(() => {
-      if (M.video && M.video.readyState === 0 && !M.fallbackHandled) {
+      if (M.video && M.video.readyState === 0 && !M.fallbackHandled && M.currentFallbackVideoId) {
         console.warn('Quá thời gian tải luồng video, kích hoạt fallback YouTube');
         fallbackToYoutube();
       }
-    }, 5000);
+    }, 8000);
 
     function onStreamReady() {
       clearTimeout(streamTimeout);
@@ -107,7 +109,7 @@
       if (M.player) {
         M.player.play().catch((e) => {
           handlePlayFailure(e);
-          if (M.video && M.video.error) {
+          if (M.video && M.video.error && M.currentFallbackVideoId && e && e.name !== 'NotAllowedError') {
             fallbackToYoutube();
           }
         });
@@ -173,11 +175,27 @@
       // Link video trực tiếp (Google Video, MP4, WebM, ...)
       M.video.src = url;
       M.video.load();
-      M.video.oncanplay = () => {
-        M.video.oncanplay = null;
+
+      let streamReadyDone = false;
+      const markStreamReady = () => {
+        if (streamReadyDone) return;
+        streamReadyDone = true;
+        M.video.removeEventListener('canplay', markStreamReady);
+        M.video.removeEventListener('loadeddata', markStreamReady);
         onStreamReady();
       };
-      onStreamReady();
+
+      if (M.video.readyState >= 2) {
+        markStreamReady();
+      } else {
+        M.video.addEventListener('canplay', markStreamReady);
+        M.video.addEventListener('loadeddata', markStreamReady);
+        setTimeout(() => {
+          if (!streamReadyDone && M.video && !M.video.error) {
+            markStreamReady();
+          }
+        }, 800);
+      }
     }
   }
 

@@ -141,16 +141,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!data) return;
 
         const videoId = data.video_id;
-        // const url = data.url;
-        const url = null;
-        const isUrlEmpty = !url || url === 'null' || (typeof url === 'string' && url.trim() === '');
+        const url = (data.url && data.url !== 'null' && typeof data.url === 'string' && data.url.trim() !== '') ? data.url.trim() : null;
 
-        if (videoId && isUrlEmpty) {
-          if (typeof M.playYoutubeIframe === 'function') {
-            M.playYoutubeIframe(videoId);
-          }
-        } else if (url && !isUrlEmpty) {
-          // Phát stream URL và truyền videoId làm dự phòng nếu URL lỗi
+        if (url) {
+          // Phát stream URL trực tiếp và truyền videoId làm dự phòng nếu URL lỗi
           if (typeof M.playStream === 'function') {
             M.playStream(url, videoId);
           }
